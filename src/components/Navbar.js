@@ -32,6 +32,7 @@ function Navbar() {
     ethereumButton.classList.add("hover:bg-green-70");
     ethereumButton.classList.add("bg-green-500");
   }
+
   async function isConnected() {
     const accounts = await window.ethereum.request({ method: "eth_accounts" });
     if (accounts.length) {
@@ -54,23 +55,6 @@ function Navbar() {
     updateAddress(addr);
     updateButton();
     toggleConnect(true);
-
-    // const chainId = await window.ethereum.request({ method: "eth_chainId" });
-    // if (chainId !== "0x56b29") {
-    //   //alert('Incorrect network! Switch your metamask network to Rinkeby');
-    //   await window.ethereum.request({
-    //     method: "wallet_switchEthereumChain",
-    //     params: [{ chainId: "0x56b29" }],
-    //   });
-    // }
-    // await window.ethereum
-    //   .request({ method: "eth_requestAccounts" })
-    //   .then(() => {
-    //     updateButton();
-    //     console.log("here");
-    //     getAddress();
-    //     window.location.replace(location.pathname);
-    //   });
   }
 
   useEffect(() => {
@@ -79,12 +63,12 @@ function Navbar() {
     window.ethereum.on("accountsChanged", function (accounts) {
       window.location.replace(location.pathname);
     });
-  });
+  }, [location.pathname]);
 
   return (
-    <div className=''>
+    <div className='bg-opacity-10 bg-white backdrop-blur-lg border-b border-white'>
       <nav className='w-full'>
-        <ul className='flex items-end justify-between py-3 bg-transparent text-white'>
+        <ul className='flex items-end justify-between py-3 text-gray-300'>
           <li className='flex items-end ml-5 pb-2'>
             <Link to='/'>
               <div className='inline-block font-bold text-xl ml-2'>
@@ -123,7 +107,9 @@ function Navbar() {
               )}
               <li>
                 <button
-                  className='enableEthereumButton bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm'
+                  className={`enableEthereumButton ${
+                    connected ? "bg-green-500 hover:bg-green-700" : "bg-blue-500 hover:bg-blue-700"
+                  } text-white font-bold py-2 px-4 rounded text-sm`}
                   onClick={connectWebsite}>
                   {connected ? "Connected" : "Connect Wallet"}
                 </button>
@@ -132,7 +118,7 @@ function Navbar() {
           </li>
         </ul>
       </nav>
-      <div className='text-white text-bold text-right mr-10 text-sm'>
+      <div className='text-gray-300 font-bold text-right mr-10 text-sm'>
         {currAddress !== "0x"
           ? "Connected to"
           : "Not Connected. Please login to view NFTs"}{" "}

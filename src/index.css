@@ -11,8 +11,8 @@ body {
   /*font-family: 'M PLUS 1p', sans-serif;*/
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: url('./bg.png');
   background-size: 200% 180%;
+  background-color: black;
   animation-duration: 3s;
   animation-timing-function: linear;
   animation-delay: 0s;
@@ -27,4 +27,17 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+form{
+  box-shadow: rgba(143, 138, 138, 0.56) 0px 22px 70px 4px;
+}
+
+.stroke{
+  -webkit-text-stroke-width: 2px;
+  font-size: 5rem;
+}
+
+.profileClassContent{
+  box-shadow: rgba(143, 138, 138, 0.56) 0px 22px 70px 4px;
 }
